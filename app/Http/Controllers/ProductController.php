@@ -9,7 +9,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products ="Product List form in ProductController";
+        $products = Product::orderBy('created_at') -> get();
         return view('products.index', ['products' => $products]);
     }
 
