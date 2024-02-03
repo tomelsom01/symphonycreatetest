@@ -40,18 +40,19 @@
                 <div class="table-product-body">
                     @if (count($products) >0)
                       @foreach ($products as $product)
-                      <img src="{{asset('images/ . $product->image)}}"/>
-                    <p>{{$product->name}}</p>
-                    <p>{{$product->category}}</p>
-                    <p>{{$product->quantity}}</p>
-                    <div>
-                        <button class="btn btn-success" >
-                            <i class="fas fa-pencil-alt" ></i>
-                        </button>
-                        <button class="btn btn-danger" >
-                            <i class="far fa-trash-alt"></i>
-                        </button>
-                    </div>
+                          <img src="{{ asset('images/' . $product->image) }}" />
+                        <p>{{$product->name}}</p>
+                        <p>{{$product->category}}</p>
+                        <p>{{$product->quantity}}</p>
+                        <div>
+                            <button class="btn btn-success" >
+                                <i class="fas fa-pencil-alt" ></i>
+                            </button>
+                            <button class="btn btn-danger" >
+                                <i class="far fa-trash-alt"></i>
+                            </button>   
+                        </div>
+                      @endforeach
                     @else
 
                     @endif

@@ -20,6 +20,15 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'category' => 'required',
+            'quantity' => 'required',
+            'price' => 'required'
+        ]);
+
         $product = new Product;
 
         $file_name = time() . '.' . $request->image->getClientOriginalExtension();
