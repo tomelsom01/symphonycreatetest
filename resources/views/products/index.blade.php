@@ -7,6 +7,10 @@
                 <h1>Products</h1>
                 <a href="{{route('products.create')}}" class="btn-link">Add Product</a>
             </div>
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success">
+                    <p>{{$message}}</p>
+                </div>
             <div class="table">
                 <div class="table-filter">
                     <div>
@@ -50,7 +54,7 @@
                             </button>
                             <button class="btn btn-danger" >
                                 <i class="far fa-trash-alt"></i>
-                            </button>   
+                            </button>
                         </div>
                       @endforeach
                     @else
