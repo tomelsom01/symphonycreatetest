@@ -7,10 +7,21 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::orderBy('created_at') -> get();
-        return view('products.index', ['products' => $products]);
+        $keyword = $request->get('search');
+        $perPage = 5;
+
+        if (!empty($keyword)) {
+            $products = Product::where('name', 'LIKE', "%$keyword%")
+                ->orWhere('category', 'LIKE', "%$keyword%")
+                ->orWhere('quantity', 'LIKE', "%$keyword%")
+                ->orWhere('price', 'LIKE', "%$keyword%")
+                ->latest()->paginate($perPage);
+        } else {
+            $products = Product::latest()->paginate($perPage);
+        }
+        return view('products.index', ['products' => $products])->with('i', (request()->input('page', 1) - 1) * $perPage);
     }
 
     public function create()

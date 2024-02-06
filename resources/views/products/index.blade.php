@@ -8,9 +8,25 @@
                 <a href="{{route('products.create')}}" class="btn-link">Add Product</a>
             </div>
             @if ($message = Session::get('success'))
-                <div class="alert alert-success">
-                    <p>{{$message}}</p>
-                </div>
+                <script type="text/javascript">
+                    const Toast = Swal.mixin({
+                      toast: true,
+                      position: "top-end",
+                      showConfirmButton: false,
+                      timer: 3000,
+                      timerProgressBar: true,
+                      didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                      }
+                   });
+                  Toast.fire({
+                    icon: "success",
+                    title: "{{$message}}"
+                  });
+                </script>
+
+            @endif
             <div class="table">
                 <div class="table-filter">
                     <div>
@@ -21,6 +37,7 @@
                         </ul>
                     </div>
                 </div>
+                <form method="GET" action="{{route('products.index')}}" accept-charset="UTF-8" role="search">
                 <div class="table-search">
                     <div>
                         <button class="search-select">
@@ -34,6 +51,7 @@
                         <input class="search-input" type="text" name="search" placeholder="Search product..." value="{{ request('search') }}">
                     </div>
                 </div>
+                </form>
                 <div class="table-product-head">
                     <p>Image</p>
                     <p>Name</p>
@@ -58,7 +76,7 @@
                         </div>
                       @endforeach
                     @else
-
+                      <p>No products found</p>
                     @endif
 
                 </div>
